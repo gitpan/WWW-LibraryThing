@@ -8,17 +8,19 @@ use LWP::UserAgent;
 use Image::Size;
 use Time::HiRes qw/sleep time/;
 
+=encoding utf8
+
 =head1 NAME
 
 WWW::LibraryThing::Covers - Interface to LibraryThing book cover API
 
 =head1 VERSION
 
-Version 0.0001
+Version 0.0002
 
 =cut
 
-our $VERSION = '0.0001';
+our $VERSION = '0.0002';
 
 # defaults
 use constant BASE_URL => 'http://covers.librarything.com/devkey';
@@ -27,9 +29,11 @@ use constant BASE_URL => 'http://covers.librarything.com/devkey';
 
     use WWW::LibraryThing::Covers;
 
-    my $lt_covers = WWW::LibraryThing::Covers->new(api_key => d231aa37c9b4f5d304a60a3d0ad1dad4,
-                                                   directory => 'images',
-                                                   size => 'large');
+    my %config = (api_key => 'd231aa37c9b4f5d304a60a3d0ad1dad4',
+                  directory => 'images',
+                  size => 'large');
+
+    my $lt_covers = WWW::LibraryThing::Covers->new(%config);
     
     $lt_covers->get('0977920151');
 
@@ -63,7 +67,7 @@ Possible values are large, medium and small.
 =item not_found
 
 Defines behaviour for cover images not available. LibraryThing returns
-a transparent 1×1 pixel GIF image. 
+a transparent 1×1 pixel GIF image.
 
 =item delay
 
@@ -277,7 +281,7 @@ L<http://search.cpan.org/dist/WWW-LibraryThing-Covers/>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2011 Stefan Hornburg (Racke).
+Copyright 2011,2012 Stefan Hornburg (Racke).
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published
